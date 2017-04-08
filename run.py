@@ -7,8 +7,9 @@ import infermedica_api
 #
 
 SECRET_KEY = 'a3knBL401Ajsgk3qr4NB' 
-app = Flask(__name__)
-app.config.from_object(__name__)
+application = Flask(__name__)
+application.config.from_object(__name__)
+
 
 # Create a Twilio client with credentials -- may be useful later for
 # sending messages without any user input
@@ -84,11 +85,11 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 		else:
 			session['state'] = 2
 			session['q_number'] = 0
-			print("Your most likely diagnosis is" + conditions[0]['name'] + " with a %f probability" % conditions[0]['probability'])
+			return ("Your most likely diagnosis is" + conditions[0]['name'] + " with a %f probability" % conditions[0]['probability'])
 			
 		
 
-@app.route("/", methods=['GET', 'POST'])
+@application.route("/", methods=['GET', 'POST'])
 def reply_to_user():
 
 	# Initialize session counters and patient
