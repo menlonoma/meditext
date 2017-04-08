@@ -84,7 +84,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 		else:
 			session['state'] = 2
 			session['q_number'] = 0
-			print("Your most likely diagnosis is" + conditions[0]['name'] + " with a %f probability" % conditions[0]['probability'])
+			return ("Your most likely diagnosis is" + conditions[0]['name'] + " with a %f probability" % conditions[0]['probability'])
 			
 		
 
