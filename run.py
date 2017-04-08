@@ -6,7 +6,7 @@ import infermedica_api
 # Store cookies for the session and configure Flask app
 #
 
-SECRET_KEY = a3knBL401Ajsgk3qr4NB 
+SECRET_KEY = 'a3knBL401Ajsgk3qr4NB' 
 app = Flask(__name__)
 app.config.from_object(__name__)
 
