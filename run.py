@@ -47,6 +47,8 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 		for item in resp.mentions:
 			symptoms.append([item.id, item.choice_id])
 			profile.add_symptom(item.id, item.choice_id)
+		if (len(symptoms) == 0):
+			return "No symptoms found. Please be more specific"
 		profile = api.diagnosis(profile)
 		session['state'] = 0
 		session['symptoms'] = symptoms
@@ -59,9 +61,10 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 	#
 	else:
 		if (q_number < 6):
-			if (user_input == 'y'):
+			user_input = user_input.lower()
+			if (user_input == 'y' or user_input == 'yes'):
 				index = 'present'
-			elif (user_input == 'n'):
+			elif (user_input == 'n' or user_input == 'no'):
 				index = 'absent'
 			else: 
 				index = 'none' 
@@ -118,4 +121,4 @@ def reply_to_user():
 	return str(resp)
 
 if __name__ == "__main__":
-	app.run(debug=True)
+	application.run(debug=True)
