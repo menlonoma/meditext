@@ -2,12 +2,11 @@ from flask import Flask, request, redirect, session
 from twilio import twiml
 from twilio.rest import TwilioRestClient
 import infermedica_api
-import os
 
 # Store cookies for the session and configure Flask app
 #
 
-SECRET_KEY = os.urandom(24) 
+SECRET_KEY = a3knBL401Ajsgk3qr4NB 
 app = Flask(__name__)
 app.config.from_object(__name__)
 
