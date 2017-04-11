@@ -35,8 +35,23 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 	#
 	# First, we've gotten the initial request and we just ask for symptoms
 	#
-	if (state == 2):
-		session['state'] = 1
+	if (state == 4):
+		session ['state'] = 3
+		return "Enter your age: "
+	elif (state == 3):
+		try:
+			session ['age'] = int(user_input)
+			session ['state'] = 2
+			return "Enter your sex (M/F): "
+		except ValueError: 
+			return "Enter your age (as a number): "
+	elif (state == 2):
+		session ['state'] = 1
+		user_input = user_input.lower()
+		if (user_input[0] == 'm'):
+			session ['sex'] = 'male'
+		else: 
+			session ['sex'] = 'female'
 		return "Enter your symptoms:"
 	#
 	# Then, we're in the state where we process the symptoms and return a question
@@ -48,6 +63,8 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 		for item in resp.mentions:
 			symptoms.append([item.id, item.choice_id])
 			profile.add_symptom(item.id, item.choice_id)
+		if (len(symptoms) == 0):
+			return "No symptoms found. Please be more specific"
 		profile = api.diagnosis(profile)
 		session['state'] = 0
 		session['symptoms'] = symptoms
@@ -60,9 +77,10 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 	#
 	else:
 		if (q_number < 6):
-			if (user_input == 'y'):
+			user_input = user_input.lower()
+			if (user_input == 'y' or user_input == 'yes'):
 				index = 'present'
-			elif (user_input == 'n'):
+			elif (user_input == 'n' or user_input == 'no'):
 				index = 'absent'
 			else: 
 				index = 'none' 
@@ -83,7 +101,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 	# most likely diagnosis.
 	#
 		else:
-			session['state'] = 2
+			session['state'] = 4
 			session['q_number'] = 0
 			return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %f probability" % conditions[0]['probability'])
 			
@@ -94,10 +112,10 @@ def reply_to_user():
 
 	# Initialize session counters and patient
 
-	state = session.get('state', 2)
+	state = session.get('state', 4)
 	q_number = session.get('q_number', 0)
-	age = session.get('age', 35)
-	sex = session.get('sex', 'male')
+	age = session.get('age')
+	sex = session.get('sex')
 	symptoms = session.get('symptoms', []) 
 	prev = session.get('prev')
 	conditions = session.get('conditions')
@@ -119,4 +137,4 @@ def reply_to_user():
 	return str(resp)
 
 if __name__ == "__main__":
-	app.run(debug=True)
+	application.run(debug=True)
