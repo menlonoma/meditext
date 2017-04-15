@@ -36,7 +36,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 	# First, we've gotten the initial request and we just ask for symptoms
 	#
 
-	if (user_input == 'q'):
+	if (user_input == 'q' || user_input == 'Q'):
 		session['state'] = 4
 		session['q_number'] = 0
 		return "Thanks"
@@ -110,7 +110,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 			session['q_number'] = 0
 			probability = conditions[0]['probability'] * 100
 			info = infermedica_api.condition_details(conditions[0]['id'])
-			return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.2f% probability" % probability + info.extras['hint'])
+			return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.2f%% probability. " % probability + "It has a " + info.severity + " severity. " + info.extras['hint'])
 			
 		
 
