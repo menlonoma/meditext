@@ -35,7 +35,12 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 	#
 	# First, we've gotten the initial request and we just ask for symptoms
 	#
-	if (state == 4):
+
+	if (user_input == 'q'):
+		session['state'] = 4
+		session['q_number'] = 0
+		return "Thanks"
+	elif (state == 4):
 		session ['state'] = 3
 		return "Enter your age: "
 	elif (state == 3):
@@ -103,7 +108,9 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 		else:
 			session['state'] = 4
 			session['q_number'] = 0
-			return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %f probability" % conditions[0]['probability'])
+			probability = conditions[0]['probability'] * 100
+			info = infermedica_api.condition_details(conditions[0]['id'])
+			return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.2f% probability" % probability + info.extras['hint'])
 			
 		
 
