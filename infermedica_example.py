@@ -10,7 +10,7 @@ request = infermedica_api.Diagnosis(sex='male', age=35)
 request.extras['ignore_groups']=True # only single questions
 
 #symptom parsing from user text
-text = input("Enter your symptoms: ")
+text = raw_input("Enter your symptoms: ")
 response = api.parse(text)
 
 for item in response.mentions:
@@ -45,7 +45,7 @@ for i in range(1,6):
 	#print(request.question.items[0]['choices'])  # list of possible answers
 	#print(request.question.items[0]['choices'][0]['id'])  # answer id
 	#print(request.question.items[0]['choices'][0]['label'])  # answer label
-	ans = input(request.question.text + ' ')
+	ans = raw_input(request.question.text + ' ')
 
 	if (ans == 'y'):
 		index = 0
@@ -56,8 +56,8 @@ for i in range(1,6):
 	# Access list of conditions with probabilities
 	#print(request.conditions)
 	#print(request.conditions[0]['id'])
-	#print(request.conditions[0]['name'])
-	#print(request.conditions[0]['probability'])
+	print(request.conditions[0]['name'])
+	print(request.conditions[0]['probability'])
 
 	# Next update the request and get next question:
 	request.extras['ignore_groups']=True
