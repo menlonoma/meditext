@@ -36,7 +36,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 	# First, we've gotten the initial request and we just ask for symptoms
 	#
 
-	if (user_input == 'q' || user_input == 'Q'):
+	if (user_input == 'q' or user_input == 'Q'):
 		session['state'] = 4
 		session['q_number'] = 0
 		return "Thanks"
