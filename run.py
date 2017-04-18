@@ -81,7 +81,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 	# object, and stop when our session counter reaches 6.
 	#
 	else:
-		if (conditions[0]['probabability'] < .8):
+		if (conditions[0]['probability'] < .8):
 			user_input = user_input.lower()
 			if (user_input == 'y' or user_input == 'yes'):
 				index = 'present'
