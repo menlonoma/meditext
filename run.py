@@ -88,7 +88,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 			elif (user_input == 'n' or user_input == 'no'):
 				index = 'absent'
 			else: 
-				index = 'none' 
+				index = 'unknown' 
 			profile = infermedica_api.Diagnosis(sex=s, age=a)
 			profile.extras['ignore_groups']=True
 			for i in range (len(symptoms)):
