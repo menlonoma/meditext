@@ -35,11 +35,20 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 	#
 	# First, we've gotten the initial request and we just ask for symptoms
 	#
+	user_input = user_input.lower()
 
 	if (user_input == 'q' or user_input == 'Q'):
 		session['state'] = 4
 		session['q_number'] = 0
 		return "Thanks"
+	elif (user_input == 'more info'):
+		probability0 = conditions[0]['probability'] * 100
+		info0 = api.condition_details(conditions[0]['id'])
+		probability1 = conditions[1]['probability'] * 100
+		info1 = api.condition_details(conditions[1]['id'])
+		probability2 = conditions[2]['probability'] * 100
+		info2 = api.condition_details(conditions[2]['id'])
+		return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.2f%% probability. " % probability0 + "It has a " + info0.severity + " severity. " + info0.extras['hint'] + "Your second most likely diagnosis is " + conditions[1]['name'] + " with a %.2f%% probability. " % probability1 + "It has a " + info1.severity + " severity. " + info1.extras['hint'] + "Your third most likely diagnosis is " + conditions[2]['name'] + " with a %.2f%% probability. " % probability2 + "It has a " + info2.severity + " severity. " + info2.extras['hint'])		
 	elif (state == 4):
 		session ['state'] = 3
 		return "Welcome to meditext. Text 'q' at any time to quit. Please enter your age: "
@@ -81,7 +90,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 	# object, and stop when our session counter reaches 6.
 	#
 	else:
-		if (conditions[0]['probability'] < .8):
+		if (conditions[0]['probability'] < .9):
 			user_input = user_input.lower()
 			if (user_input == 'y' or user_input == 'yes'):
 				index = 'present'
@@ -104,7 +113,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 				return profile.question.text
 			else:
 				probability = conditions[0]['probability'] * 100
-				return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.2f%% probability. " % probability + "For more answer the following question: " + profile.question.text)
+				return ("Your three most likely diagnoses are " + conditions[0]['name'] + ", " + conditions[1]['name'] + ", " + conditions[2]['name'] + ". For more information, text 'more info'.  To continue, answer the following question: " + profile.question.text)
 	#
 	# Once we've asked 6 questions, we reset the session counters and return the
 	# most likely diagnosis.
@@ -112,10 +121,17 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 		else:
 			session['state'] = 4
 			session['q_number'] = 0
-			probability = conditions[0]['probability'] * 100
-			info = api.condition_details(conditions[0]['id'])
-			return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.2f%% probability. " % probability + "It has a " + info.severity + " severity. " + info.extras['hint'])
-			
+			#probability = conditions[0]['probability'] * 100
+			#info = api.condition_details(conditions[0]['id'])
+			#return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.2f%% probability. " % probability + "It has a " + info.severity + " severity. " + info.extras['hint'])
+			probability0 = conditions[0]['probability'] * 100
+			info0 = api.condition_details(conditions[0]['id'])
+			probability1 = conditions[1]['probability'] * 100
+			info1 = api.condition_details(conditions[1]['id'])
+			probability2 = conditions[2]['probability'] * 100
+			info2 = api.condition_details(conditions[2]['id'])
+			return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.2f%% probability. " % probability0 + "It has a " + info0.severity + " severity. " + info0.extras['hint'] + "Your second most likely diagnosis is " + conditions[1]['name'] + " with a %.2f%% probability. " % probability1 + "It has a " + info1.severity + " severity. " + info1.extras['hint'] + "Your third most likely diagnosis is " + conditions[2]['name'] + " with a %.2f%% probability. " % probability2 + "It has a " + info2.severity + " severity. " + info2.extras['hint'])		
+
 		
 
 @application.route("/", methods=['GET', 'POST'])
