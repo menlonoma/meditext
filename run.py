@@ -42,7 +42,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 		return "Thanks"
 	elif (state == 4):
 		session ['state'] = 3
-		return "Enter your age: "
+		return "Welcome to meditext. Text 'q' at any time to quit. Please enter your age: "
 	elif (state == 3):
 		try:
 			session ['age'] = int(user_input)
@@ -81,7 +81,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 	# object, and stop when our session counter reaches 6.
 	#
 	else:
-		if (q_number < 6):
+		if (conditions[0]['probabability'] < .8):
 			user_input = user_input.lower()
 			if (user_input == 'y' or user_input == 'yes'):
 				index = 'present'
@@ -100,7 +100,11 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 			session['symptoms'] = symptoms
 			session['prev'] = profile.question.items[0]['id']
 			session['conditions'] = profile.conditions 
-			return profile.question.text
+			if (q_number <= 10):
+				return profile.question.text
+			else:
+				probability = conditions[0]['probability'] * 100
+				return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.2f%% probability. " % probability + "For more answer the following question: " + profile.question.text)
 	#
 	# Once we've asked 6 questions, we reset the session counters and return the
 	# most likely diagnosis.
