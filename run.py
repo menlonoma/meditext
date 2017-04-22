@@ -2,7 +2,9 @@ from flask import Flask, request, redirect, session
 from twilio import twiml
 from twilio.rest import TwilioRestClient
 import infermedica_api
+import webscraper
 
+#
 # Store cookies for the session and configure Flask app
 #
 
@@ -10,7 +12,7 @@ SECRET_KEY = 'a3knBL401Ajsgk3qr4NB'
 application = Flask(__name__)
 application.config.from_object(__name__)
 
-
+#
 # Create a Twilio client with credentials -- may be useful later for
 # sending messages without any user input
 #
@@ -22,25 +24,23 @@ client = TwilioRestClient(account_sid, auth_token)
 #configure the api
 api = infermedica_api.API(app_id='30d763f7', app_key='91a0b173fc675d415ef8f782a4eff3e8')
 
-# Create diagnosis object with initial patient information.
-# Note that time argument is optional here as well as in the add_symptom function
-
-
-
-# This gets the question we want to ask, depending on the state that we're in. The session and the 
+# This function gets the question we want to ask, depending on the state that we're in. The state and the 
 # q_number are counters stored in the session object, and get reset when we're done with a user
-# interaction.
+# interaction. Every time the function is called, it's passed in the current patient information.
   
 def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 	#
-	# First, we've gotten the initial request and we just ask for symptoms
+	# If the user wants to restart, they can enter Q and quit.
 	#
 	user_input = user_input.lower()
-
 	if (user_input == 'q' or user_input == 'Q'):
 		session['state'] = 4
 		session['q_number'] = 0
 		return "Thanks"
+	#
+	# If after 10 questions, the user just wants more info on their diagnosis as
+ 	# they continue, they can request it.
+	#
 	elif (user_input == 'more info'):
 		probability0 = conditions[0]['probability'] * 100
 		info0 = api.condition_details(conditions[0]['id'])
@@ -48,7 +48,10 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 		info1 = api.condition_details(conditions[1]['id'])
 		probability2 = conditions[2]['probability'] * 100
 		info2 = api.condition_details(conditions[2]['id'])
-		return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.2f%% probability. " % probability0 + "It has a " + info0.severity + " severity. " + info0.extras['hint'] + "Your second most likely diagnosis is " + conditions[1]['name'] + " with a %.2f%% probability. " % probability1 + "It has a " + info1.severity + " severity. " + info1.extras['hint'] + "Your third most likely diagnosis is " + conditions[2]['name'] + " with a %.2f%% probability. " % probability2 + "It has a " + info2.severity + " severity. " + info2.extras['hint'])		
+		treatment = webscraper.parse_result(conditions[0]['name'])
+		return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.2f%% probability. " % probability0 + "It has a " + info0.severity + " severity. " + info0.extras['hint'] + treatment + "Your second most likely diagnosis is " + conditions[1]['name'] + " with a %.2f%% probability. " % probability1 + "It has a " + info1.severity + " severity. " + info1.extras['hint'] + "Your third most likely diagnosis is " + conditions[2]['name'] + " with a %.2f%% probability. " % probability2 + "It has a " + info2.severity + " severity. " + info2.extras['hint'])		
+	#
+	# In states 4-2, we just start the user interaction, asking for age, sex, and symptoms. 
 	elif (state == 4):
 		session ['state'] = 3
 		return "Welcome to meditext. Text 'q' at any time to quit. Please enter your age: "
@@ -68,7 +71,9 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 			session ['sex'] = 'female'
 		return "Enter your symptoms:"
 	#
-	# Then, we're in the state where we process the symptoms and return a question
+	# Then, we're in the state where we process the symptoms and return a question.
+	# If we cannot parse any symptoms from user input, we will tell them to be more
+	# specific. Otherwise, we return a question and move to state 0.
 	# 
 	elif (state == 1):
 		resp = api.parse(user_input)
@@ -86,8 +91,8 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 		session['conditions'] = profile.conditions
 		return profile.question.text
 	#
-	# Now, we process the yes-no answers to our questions, update the patient
-	# object, and stop when our session counter reaches 6.
+	# Now, we process the yes-no answers to our questions. If we don't have a 
+	# diagnosis with 90% probability, we keep asking questions.
 	#
 	else:
 		if (conditions[0]['probability'] < .9):
@@ -109,35 +114,39 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 			session['symptoms'] = symptoms
 			session['prev'] = profile.question.items[0]['id']
 			session['conditions'] = profile.conditions 
+			#
+			# If we've asked 10 questions, then we return their 3 
+			# most likely diagnoses with each subsequent question.
+			# The user can then request more info.
+			#
 			if (q_number <= 10):
 				return profile.question.text
 			else:
 				probability = conditions[0]['probability'] * 100
 				return ("Your three most likely diagnoses are " + conditions[0]['name'] + ", " + conditions[1]['name'] + ", " + conditions[2]['name'] + ". For more information, text 'more info'.  To continue, answer the following question: " + profile.question.text)
 	#
-	# Once we've asked 6 questions, we reset the session counters and return the
-	# most likely diagnosis.
+	# Once we've gotten to 90% probability, we return a diagnosis with treatment
+	# details. 
 	#
 		else:
 			session['state'] = 4
-			session['q_number'] = 0
-			#probability = conditions[0]['probability'] * 100
-			#info = api.condition_details(conditions[0]['id'])
-			#return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.2f%% probability. " % probability + "It has a " + info.severity + " severity. " + info.extras['hint'])
+			session['q_number'] = 0			
 			probability0 = conditions[0]['probability'] * 100
 			info0 = api.condition_details(conditions[0]['id'])
 			probability1 = conditions[1]['probability'] * 100
 			info1 = api.condition_details(conditions[1]['id'])
 			probability2 = conditions[2]['probability'] * 100
 			info2 = api.condition_details(conditions[2]['id'])
-			return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.2f%% probability. " % probability0 + "It has a " + info0.severity + " severity. " + info0.extras['hint'] + "Your second most likely diagnosis is " + conditions[1]['name'] + " with a %.2f%% probability. " % probability1 + "It has a " + info1.severity + " severity. " + info1.extras['hint'] + "Your third most likely diagnosis is " + conditions[2]['name'] + " with a %.2f%% probability. " % probability2 + "It has a " + info2.severity + " severity. " + info2.extras['hint'])		
+			treatment = webscraper.parse_result(conditions[0]['name'])
+			return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.2f%% probability. " % probability0 + "It has a " + info0.severity + " severity. " + info0.extras['hint'] + treatment + "Your second most likely diagnosis is " + conditions[1]['name'] + " with a %.2f%% probability. " % probability1 + "It has a " + info1.severity + " severity. " + info1.extras['hint'] + "Your third most likely diagnosis is " + conditions[2]['name'] + " with a %.2f%% probability. " % probability2 + "It has a " + info2.severity + " severity. " + info2.extras['hint'])		
 
 		
 
 @application.route("/", methods=['GET', 'POST'])
 def reply_to_user():
 
-	# Initialize session counters and patient
+	# Initialize session counters and patient information.
+	# This information will be passed to get_question every time we get a reply.
 
 	state = session.get('state', 4)
 	q_number = session.get('q_number', 0)
@@ -146,16 +155,13 @@ def reply_to_user():
 	symptoms = session.get('symptoms', []) 
 	prev = session.get('prev')
 	conditions = session.get('conditions')
-	#patient = session.get('patient', infermedica_api.Diagnosis(sex='male', age=35))
-	#patient.extras['ignore_groups']=True # only single questions
 
-	
 	# Store properties of the SMS that we received
 
 	number = request.values.get('From')
 	msg = request.values.get('Body')
 
-	# Create a response object, call the function above to generate the question, and
+	# Create a response object, call get_question to generate the question, and
 	# return it to the user.
 
         resp = twiml.Response()
