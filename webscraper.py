@@ -16,6 +16,8 @@ def get_treatment(diagnosis):
 	soup = BeautifulSoup(html, 'html.parser')
 	html2 = soup.find_all("div", class_ = "_dyk _wje")
 	html1 = soup.find_all("div", class_="_fF _Zni kno-fb-ctx")
+	if html1 == []:
+		return ' '
 	return ' ' + html1[0].text + ' Treatments: ' + html2[0].text + '. '
 	#html1 += html2[0]
 	#responses = []
