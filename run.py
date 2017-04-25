@@ -142,7 +142,14 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 				return profile.question.text
 			else:
 				probability = conditions[0]['probability'] * 100
-				return ("Your three most likely diagnoses are " + conditions[0]['name'] + ", " + conditions[1]['name'] + ", " + conditions[2]['name'] + ". For more information, text 'more info'.  To continue, answer the following question: " + profile.question.text)
+				length = len(conditions)
+				text = "Your most likely diagnoses are " + conditions[0]['name']
+				if (length > 1):
+					text += ", " + conditions[1]['name']
+				if (length > 2):
+					text += ", " + conditions[2]['name']
+				text += ". For more information, text 'more info'.  To continue, answer the following question: " + profile.question.text
+				return text
 	#
 	# Once we've gotten to 90% probability, we return a diagnosis with treatment
 	# details. 
@@ -156,7 +163,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 			severity0 = get_severity(info0.severity)
 			treatment = webscraper.parse_result(conditions[0]['name'])
 			text = "Your most likely diagnosis is " + conditions[0]['name'] + " with a %.0f%% probability. " % probability0 + severity0 + info0.extras['hint'] + '\n' + treatment + '\n'
-			if (length >= 2):
+			if (length > 1):
 				probability1 = conditions[1]['probability'] * 100
 				info1 = api.condition_details(conditions[1]['id'])
 				severity1 = get_severity(info1.severity)
