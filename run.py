@@ -81,7 +81,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 				return "Sorry, we could not find disease information. Either try another disease name or for a diagnosis, please enter your age: "
 			else:
 				session ['state'] = 4
-				return treatment + 'Text hello to restart Meditext.'
+				return user_input + ": " + treatment + 'Text hello to restart Meditext.'
 	elif (state == 2):
 		session ['state'] = 1
 		user_input = user_input.lower()
