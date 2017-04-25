@@ -36,7 +36,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 	if (user_input == 'q' or user_input == 'Q'):
 		session['state'] = 4
 		session['q_number'] = 0
-		return "Thanks"
+		return "Thanks for using Meditext. Text hello to restart Meditext."
 	#
 	# If after 10 questions, the user just wants more info on their diagnosis as
  	# they continue, they can request it.
@@ -80,7 +80,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 				return "Sorry, we could not find disease information. Either try another disease name or for a diagnosis, please enter your age: "
 			else:
 				session ['state'] = 4
-				return treatment
+				return treatment + 'Text hello to restart Meditext.'
 	elif (state == 2):
 		session ['state'] = 1
 		user_input = user_input.lower()
