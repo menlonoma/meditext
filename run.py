@@ -67,14 +67,20 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 	# In states 4-2, we just start the user interaction, asking for age, sex, and symptoms. 
 	elif (state == 4):
 		session ['state'] = 3
-		return "Welcome to meditext. Text 'q' at any time to quit. Please enter your age: "
+		return "Welcome to Meditext. Text 'q' at any time to quit. For disease information, text disease name. For a diagnosis, please enter your age: "
 	elif (state == 3):
 		try:
 			session ['age'] = int(user_input)
 			session ['state'] = 2
 			return "Enter your sex (M/F): "
 		except ValueError: 
-			return "Enter your age (as a number): "
+			treatment = webscraper.parse_result(user_input)
+			if treatment == ' ':
+				session ['state'] = 3
+				return "Sorry, we could not find disease information. Either try another disease name or for a diagnosis, please enter your age: "
+			else:
+				session ['state'] = 4
+				return treatment
 	elif (state == 2):
 		session ['state'] = 1
 		user_input = user_input.lower()
