@@ -49,7 +49,11 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 		probability2 = conditions[2]['probability'] * 100
 		info2 = api.condition_details(conditions[2]['id'])
 		treatment = webscraper.parse_result(conditions[0]['name'])
-		return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.2f%% probability. " % probability0 + "It has a " + info0.severity + " severity. " + info0.extras['hint'] + treatment + "Your second most likely diagnosis is " + conditions[1]['name'] + " with a %.2f%% probability. " % probability1 + "It has a " + info1.severity + " severity. " + info1.extras['hint'] + "Your third most likely diagnosis is " + conditions[2]['name'] + " with a %.2f%% probability. " % probability2 + "It has a " + info2.severity + " severity. " + info2.extras['hint'])		
+		severity0 = get_severity(info0.severity)
+		severity1 = get_severity(info1.severity)
+		severity2 = get_severity(info2.severity)
+		return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.0f%% probability. " % probability0 + severity0 + info0.extras['hint'] + treatment + " Your second most likely diagnosis is " + conditions[1]['name'] + " with a %.0f%% probability. " % probability1 + severity1 + info1.extras['hint'] + " Your third most likely diagnosis is " + conditions[2]['name'] + " with a %.0f%% probability. " % probability2 + severity2 + info2.extras['hint'])		
+
 	#
 	# In states 4-2, we just start the user interaction, asking for age, sex, and symptoms. 
 	elif (state == 4):
@@ -138,9 +142,20 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 			probability2 = conditions[2]['probability'] * 100
 			info2 = api.condition_details(conditions[2]['id'])
 			treatment = webscraper.parse_result(conditions[0]['name'])
-			return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.2f%% probability. " % probability0 + "It has a " + info0.severity + " severity. " + info0.extras['hint'] + treatment + "Your second most likely diagnosis is " + conditions[1]['name'] + " with a %.2f%% probability. " % probability1 + "It has a " + info1.severity + " severity. " + info1.extras['hint'] + "Your third most likely diagnosis is " + conditions[2]['name'] + " with a %.2f%% probability. " % probability2 + "It has a " + info2.severity + " severity. " + info2.extras['hint'])		
+			severity0 = get_severity(info0.severity)
+			severity1 = get_severity(info1.severity)
+			severity2 = get_severity(info2.severity)
+			return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.0f%% probability. " % probability0 + severity0 + info0.extras['hint'] + treatment + " Your second most likely diagnosis is " + conditions[1]['name'] + " with a %.0f%% probability. " % probability1 + severity1 + info1.extras['hint'] + " Your third most likely diagnosis is " + conditions[2]['name'] + " with a %.0f%% probability. " % probability2 + severity2 + info2.extras['hint'])		
 
-		
+
+def get_severity(severity):
+	if (severity == 'mild'):
+		return 'See a doctor if symptoms worsen. '
+	elif (severity == 'moderate'):
+		return 'See a doctor soon. '
+	else:
+		return 'See a doctor immediately. '
+	
 
 @application.route("/", methods=['GET', 'POST'])
 def reply_to_user():
