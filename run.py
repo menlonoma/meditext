@@ -36,6 +36,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 	if (user_input == 'q' or user_input == 'Q'):
 		session['state'] = 4
 		session['q_number'] = 0
+		session['symptoms'] = []
 		return "Thanks for using Meditext. Text hello to restart Meditext."
 	#
 	# If after 10 questions, the user just wants more info on their diagnosis as
@@ -156,7 +157,8 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 	#
 		else:
 			session['state'] = 4
-			session['q_number'] = 0			
+			session['q_number'] = 0	
+			session['symptoms'] =[]		
 			length = len(conditions)
 			probability0 = conditions[0]['probability'] * 100
 			info0 = api.condition_details(conditions[0]['id'])
