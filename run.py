@@ -42,17 +42,26 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
  	# they continue, they can request it.
 	#
 	elif (user_input == 'more info'):
+		length = len(conditions)
 		probability0 = conditions[0]['probability'] * 100
 		info0 = api.condition_details(conditions[0]['id'])
-		probability1 = conditions[1]['probability'] * 100
-		info1 = api.condition_details(conditions[1]['id'])
-		probability2 = conditions[2]['probability'] * 100
-		info2 = api.condition_details(conditions[2]['id'])
-		treatment = webscraper.parse_result(conditions[0]['name'])
 		severity0 = get_severity(info0.severity)
-		severity1 = get_severity(info1.severity)
-		severity2 = get_severity(info2.severity)
-		return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.0f%% probability. " % probability0 + severity0 + info0.extras['hint'] + treatment + " Your second most likely diagnosis is " + conditions[1]['name'] + " with a %.0f%% probability. " % probability1 + severity1 + info1.extras['hint'] + " Your third most likely diagnosis is " + conditions[2]['name'] + " with a %.0f%% probability. " % probability2 + severity2 + info2.extras['hint'])		
+		treatment = webscraper.parse_result(conditions[0]['name'])
+		text = "Your most likely diagnosis is " + conditions[0]['name'] + " with a %.0f%% probability. " % probability0 + severity0 + info0.extras['hint'] + '\n' + treatment + '\n'
+		if (length >= 2):
+			probability1 = conditions[1]['probability'] * 100
+			info1 = api.condition_details(conditions[1]['id'])
+			severity1 = get_severity(info1.severity)
+			text += " Your second most likely diagnosis is " + conditions[1]['name'] + " with a %.0f%% probability. " % probability1 + severity1 + info1.extras['hint'] + '\n'	
+		if (length > 2):
+			probability2 = conditions[2]['probability'] * 100
+			info2 = api.condition_details(conditions[2]['id'])
+			severity2 = get_severity(info2.severity)
+			text += " Your third most likely diagnosis is " + conditions[2]['name'] + " with a %.0f%% probability. " % probability2 + severity2 + info2.extras['hint']
+		
+		
+		
+		return text
 
 	#
 	# In states 4-2, we just start the user interaction, asking for age, sex, and symptoms. 
@@ -135,18 +144,24 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 		else:
 			session['state'] = 4
 			session['q_number'] = 0			
+			length = len(conditions)
 			probability0 = conditions[0]['probability'] * 100
 			info0 = api.condition_details(conditions[0]['id'])
-			probability1 = conditions[1]['probability'] * 100
-			info1 = api.condition_details(conditions[1]['id'])
-			probability2 = conditions[2]['probability'] * 100
-			info2 = api.condition_details(conditions[2]['id'])
-			treatment = webscraper.parse_result(conditions[0]['name'])
 			severity0 = get_severity(info0.severity)
-			severity1 = get_severity(info1.severity)
-			severity2 = get_severity(info2.severity)
-			return ("Your most likely diagnosis is " + conditions[0]['name'] + " with a %.0f%% probability. " % probability0 + severity0 + info0.extras['hint'] + treatment + " Your second most likely diagnosis is " + conditions[1]['name'] + " with a %.0f%% probability. " % probability1 + severity1 + info1.extras['hint'] + " Your third most likely diagnosis is " + conditions[2]['name'] + " with a %.0f%% probability. " % probability2 + severity2 + info2.extras['hint'])		
-
+			treatment = webscraper.parse_result(conditions[0]['name'])
+			text = "Your most likely diagnosis is " + conditions[0]['name'] + " with a %.0f%% probability. " % probability0 + severity0 + info0.extras['hint'] + '\n' + treatment + '\n'
+			if (length >= 2):
+				probability1 = conditions[1]['probability'] * 100
+				info1 = api.condition_details(conditions[1]['id'])
+				severity1 = get_severity(info1.severity)
+				text += " Your second most likely diagnosis is " + conditions[1]['name'] + " with a %.0f%% probability. " % probability1 + severity1 + info1.extras['hint'] + '\n'	
+			if (length > 2):
+				probability2 = conditions[2]['probability'] * 100
+				info2 = api.condition_details(conditions[2]['id'])
+				severity2 = get_severity(info2.severity)
+				text += " Your third most likely diagnosis is " + conditions[2]['name'] + " with a %.0f%% probability. " % probability2 + severity2 + info2.extras['hint']			
+		
+			return text
 
 def get_severity(severity):
 	if (severity == 'mild'):
