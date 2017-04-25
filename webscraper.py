@@ -23,5 +23,4 @@ def get_treatment(diagnosis):
 	#responses = []
 	#for x in html1:
 		#responses.append(x.text)
-	#for x in responses:
-		#print x
+	
