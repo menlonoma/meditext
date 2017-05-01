@@ -89,7 +89,7 @@ def get_question(user_input, state, q_number, a, s, symptoms, prev, conditions):
 			session ['sex'] = 'male'
 		else: 
 			session ['sex'] = 'female'
-		return "Enter your symptoms:"
+		return "Enter all your symptoms here, separated by a space or comma:"
 	#
 	# Then, we're in the state where we process the symptoms and return a question.
 	# If we cannot parse any symptoms from user input, we will tell them to be more
