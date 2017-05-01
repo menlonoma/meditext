@@ -1,0 +1,232 @@
+Acinetobacter infections
+Actinomycosis
+African sleeping sickness
+AIDS
+Amebiasis
+Anaplasmosis
+Angiostrongyliasis
+Anisakiasis
+Anthrax
+Arcanobacterium haemolyticum infection
+Argentine hemorrhagic fever
+Ascariasis
+Aspergillosis
+Astrovirus infection
+Babesiosis
+Bacillus cereus infection
+Bacterial pneumonia
+Bacterial vaginosis
+Bacteroides infection
+Balantidiasis
+Bartonellosis
+Baylisascaris infection
+BK virus infection
+Black piedra
+Blastocystosis
+Blastomycosis
+Bolivian hemorrhagic fever
+Botulism
+Brazilian hemorrhagic fever
+Brucellosis
+Bubonic plague
+Burkholderia infection
+Buruli ulcer
+Calicivirus infection
+Campylobacteriosis
+Candidiasis
+Capillariasis
+Carrion's disease
+Cat-scratch disease
+Cellulitis
+Chagas Disease
+Chancroid
+Chickenpox
+Chikungunya
+Chlamydia
+Chlamydophila pneumoniae infection
+Cholera
+Chromoblastomycosis
+Chytridiomycosis
+Clonorchiasis
+Clostridium difficile colitis
+Coccidioidomycosis
+Colorado tick fever
+Common cold
+Creutzfeldt–Jakob disease
+Crimean-Congo hemorrhagic fever
+Cryptococcosis
+Cryptosporidiosis
+Cutaneous larva migrans
+Cyclosporiasis
+Cysticercosis
+Cytomegalovirus infection
+Dengue fever
+Desmodesmus infection
+Dientamoebiasis
+Diphtheria
+Diphyllobothriasis
+Dracunculiasis
+Ebola hemorrhagic fever
+Echinococcosis
+Ehrlichiosis
+Enterobiasis (Pinworm infection)
+Enterococcus infection
+Enterovirus infection
+Epidemic typhus
+Erythema infectiosum
+Exanthem subitum
+Fasciolasis
+Fasciolopsiasis
+Fatal familial insomnia
+Filariasis
+Food poisoning by Clostridium perfringens
+Free-living amebic infection
+Fusobacterium infection
+Gas gangrene
+Geotrichosis
+Gerstmann-Sträussler-Scheinker syndrome
+Giardiasis
+Glanders
+Gnathostomiasis
+Gonorrhea
+Granuloma inguinale
+Group A streptococcal infection
+Group B streptococcal infection
+Haemophilus influenzae infection
+Hand, foot and mouth disease
+Hantavirus Pulmonary Syndrome
+Heartland virus disease
+Helicobacter pylori infection
+Hemolytic-uremic syndrome
+Hemorrhagic fever with renal syndrome
+Hepatitis A
+Hepatitis B
+Hepatitis C
+Hepatitis D
+Hepatitis E
+Herpes simplex
+Histoplasmosis
+Hookworm infection
+Human bocavirus infection
+Human ewingii ehrlichiosis
+Human granulocytic anaplasmosis
+Human metapneumovirus infection
+Human monocytic ehrlichiosis
+Human papillomavirus (HPV) infection
+Human parainfluenza virus infection
+Hymenolepiasis
+Epstein–Barr virus infectious mononucleosis
+Influenza
+Isosporiasis
+Kawasaki disease
+Keratitis
+Kingella kingae infection
+Kuru
+Lassa fever
+Legionellosis
+Legionellosis
+Leishmaniasis
+Leprosy
+Leptospirosis
+Listeriosis
+Lyme disease
+Lymphatic filariasis
+Lymphocytic choriomeningitis
+Malaria
+Marburg hemorrhagic fever
+Measles
+Middle East respiratory syndrome
+Melioidosis
+Meningitis
+Meningococcal disease
+Metagonimiasis
+Microsporidiosis
+Molluscum contagiosum
+Monkeypox
+Mumps
+Murine typhus
+Mycoplasma pneumonia
+Mycetoma
+Myiasis
+Neonatal conjunctivitis
+Norovirus 
+Nocardiosis
+Onchocerciasis
+Paracoccidioidomycosis
+Paragonimiasis
+Pasteurellosis
+Pediculosis capitis
+Pediculosis corporis
+Pediculosis pubis
+Pelvic inflammatory disease
+Pertussis
+Plague
+Pneumococcal infection
+Pneumocystis pneumonia
+Pneumonia
+Poliomyelitis
+Prevotella infection
+Primary amoebic meningoencephalitis
+Progressive multifocal leukoencephalopathy
+Psittacosis
+Q fever
+Rabies
+Relapsing fever
+Respiratory syncytial virus infection
+Rhinosporidiosis
+Rhinovirus infection
+Rickettsial infection
+Rickettsialpox
+Rift Valley fever
+Rocky Mountain spotted fever
+Rotavirus
+Rubella
+Salmonellosis
+SARS (Severe Acute Respiratory Syndrome)
+Scabies
+Schistosomiasis
+Sepsis
+Shigellosis (Bacillary dysentery)
+Shingles (Herpes zoster)
+Smallpox (Variola)
+Sporotrichosis
+Staphylococcal food poisoning
+Staphylococcal infection
+Strongyloidiasis
+Subacute sclerosing panencephalitis
+Syphilis
+Taeniasis
+Tetanus (Lockjaw)
+Tinea barbae (Barber's itch)
+Tinea capitis (Ringworm of the Scalp)
+Tinea corporis (Ringworm of the Body)
+Tinea cruris (Jock itch)
+Tinea manum (Ringworm of the Hand)
+Tinea nigra
+Tinea pedis (Athlete’s foot)
+Tinea unguium (Onychomycosis)
+Tinea versicolor
+Toxocariasis
+Toxocariasis
+Trachoma
+Toxoplasmosis
+Trichinosis
+Trichomoniasis
+Trichuriasis
+Tuberculosis
+Tularemia
+Typhoid fever
+Typhus fever
+Ureaplasma urealyticum infection
+Valley fever
+Venezuelan equine encephalitis
+Venezuelan hemorrhagic fever
+Vibrio vulnificus infection
+Vibrio parahaemolyticus enteritis
+Viral pneumonia
+West Nile Fever
+White piedra (Tinea blanca)
+Yersinia pseudotuberculosis infection
+Yersiniosis
+Yellow fever
+Zygomycosis

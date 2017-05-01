@@ -1,0 +1,107 @@
+Acute Flaccid Myelitis (AFM) CDC   FAQ's
+Anaplasmosis
+Anthrax
+Babesiosis
+Botulism
+Brucellosis
+Burkholderia mallei
+Burkholderia pseudomallei
+Campylobacteriosis
+Carbapenem-resistant Enterobacteriaceae
+Chancroid
+Chikungunya 
+Chlamydia
+Ciguatera 
+Clostridium Difficile Infection 
+Clostridium Perfringens
+Coccidioidomycosis fungal infection
+Creutzfeldt-Jacob Disease
+Cryptosporidiosis
+Cyclosporiasis
+Dengue
+Diphtheria 
+E. Coli infection
+Eastern Equine Encephalitis
+Ebola Hemorrhagic Fever
+Ebola
+Ehrlichiosis
+Encephalitis 
+Enterovirus Infection
+Giardiasis
+Gonococcal Infection
+Granuloma inguinale 
+Haemophilus Influenza disease
+Hantavirus Pulmonary Syndrome 
+Hemolytic Uremic Syndrome 
+Hepatitis A
+Hepatitis B
+Hepatitis C
+Hepatitis D
+Hepatitis E
+Herpes
+Herpes Zoster
+Shingles
+Histoplasmosis infection 
+Human Immunodeficiency Virus/AIDS
+Human Papillomarivus
+Influenza
+Lead Poisoning
+Legionellosis
+Leprosy 
+Leptospirosis
+Listeriosis
+Lyme Disease
+Lymphogranuloma venereum infection
+Malaria
+Measles
+Meningitis
+Meningococcal Disease
+Middle East Respiratory Syndrome Coronavirus
+Mumps
+Norovirus
+Paralytic Shellfish Poisoning
+Pediculosis (Lice, Head and Body Lice)
+Pelvic Inflammatory Disease (PID)
+Pertussis
+Plague; Bubonic, Septicemic, Pneumonic (Plague)
+Pneumococcal Disease
+Poliomyelitis (Polio)
+Psittacosis
+Pthiriasis (Crabs; Pubic Lice Infestation) 
+Small pox
+Monkeypox
+Cowpox
+Q-Fever
+Rabies 
+Ricin Poisoning
+Rickettsiosis (Rocky Mountain Spotted Fever)
+Rubella , Including congenital
+Salmonellosis gastroenteritis
+Scabies Infestation
+Scombroid 
+Severe Acute Respiratory Syndrome
+Shigellosis gastroenteritis (Shigella)
+Smallpox
+Staphyloccal Infection , Methicillin-resistant (MRSA)
+Staphylococcal Food Poisoning
+Staphylococcal Infection , Vancomycin Intermediate (VISA)  
+Staphylococcal Infection , Vancomycin Resistant (VRSA)
+Streptococcal Disease , Group A
+Streptococcal Disease , Group B
+Streptococcal Toxic-Shock Syndrome
+Syphilis
+Tetanus Infection , tetani (Lock Jaw)
+Trichonosis Infection (Trichinosis)
+Tuberculosis (TB)
+Tularemia (Rabbit fever)
+Typhoid Fever , Group D
+Typhus
+Vaginosis , bacterial (Yeast Infection)
+Varicella (Chickenpox)
+Vibrio cholerae (Cholera)
+Vibriosis (Vibrio)
+Viral Hemorrhagic Fever (Ebola, Lassa, Marburg)
+West Nile Virus
+Yellow Fever
+Yersenia (Yersinia)
+Zika (Zika Virus) 
