@@ -11,10 +11,10 @@ differential diagnosis. Answer accordingly, and follow the instructions provided
 Meditext. If an age is sent to start a differential diagnosis, the user will be prompted
 for their sex, followed by their symptoms, and then will be asked a series of yes or no
 questions. If the user is asked more than 10 yes or no questions and a conclusive diagnosis
-(confidence of at least 90%), Meditext will begin sending the user the top three diagnoses
-along with the next yes or no question. Users can text 'more info' at this point for more
-information about the diagnoses, and then can send an answer to the next question to continue
-or text 'q' to quit.
+(confidence of at least 90%) has not yet been made, Meditext will begin sending the user the
+top three diagnoses along with the next yes or no question. Users can text 'more info' at this 
+point for more information about the diagnoses, and then can send an answer to the next question 
+to continue or text 'q' to quit.
 
 ### Interacting with Meditext via Browser
 
@@ -28,22 +28,20 @@ In the URL above, 16466237048 represents a phone number, which Meditext expects 
 receive from Twilio, along with a message body, encoded in place of MESSAGEHERE.
 
 To begin an interaction with Meditext, a user must send a text to Meditext. This can
-be simulated with the following URL:
-
-http://meditextcdr.herokuapp.com/?From=%2B16466237048&Body=hello
+be simulated by replacing MESSAGEHERE in the above URL with 'hello'.
 
 Meditext then prompts the user for their age if they wish to obtain a diagnosis,
 or the name of a disease if they are looking for treatment information. Replace
 the MESSAGEHERE field in the testing URL with the appropriate input and then press enter.
 
-Search example: http://meditextcdr.herokuapp.com/?From=%2B16466237048&Body=burn
+**Search example:** From the welcome page, replace MESSAGEHERE with 'burn'
 
 This will lead Meditext to return information about caring for a burn.
 
-Diagnosis example: http://meditextcdr.herokuapp.com/?From=%2B16466237048&Body=20
+**Diagnosis example:** From the welcome page, replace MESSAGEHERE with '20'
 
 By sending 20, Meditext will begin a process of attempting to diagnose a 20 year-old person,
 and will prompt the user for their sex. Change the MESSAGEHERE field to M or F and press enter.
-To enter symptoms, change the MESSAGEHERE field to include symptoms separated by '+'.
+To enter symptoms, change the MESSAGEHERE field to include symptoms separated by '+' (i.e. coughing+chest+pain).
 Meditext then begins asking yes or no questions, which can be answered with yes, no, Y, and N,
 regardless of capitalization. Continue answering questions until Meditext returns a diagnosis.
